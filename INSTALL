@@ -92,6 +92,38 @@ The ffmpeg-php methods should now be built directly into php and so no need to
 explicitly load the extension at runtime.
 
 
+BUILDING FFMPEG-PHP AS A SHARED EXTENSION FOR ALPINE PHP ON DOCKER
+------------------------------------------------------------------
+
+1. Install build dependencies
+
+        apk add --update make autoconf gcc libc-dev zlib-dev libtool re2c ffmpeg-dev git
+
+2. Clone over git
+
+        git clone /path/to/git/ffmpeg-php.git \
+
+3. cd into the ffmpeg extension directory
+
+        cd ffmpeg-php/
+
+4. Run phpize (included with your php install) to build configuration files
+
+        phpize
+
+5. Configure
+
+        ./configure --enable-shared --prefix=/usr
+
+6. Build shared extension
+
+        make
+
+7. Install the shared extension 
+
+        make install
+
+
 TESTING THE INSTALLATION
 ------------------------
 
@@ -102,6 +134,7 @@ somewhere (put both in the same directory).
 
 RESULTS: You should get a listing of the methods provided by the ffmpeg-php 
          module as well as some test output from the methods.
+
 
 TROUBLESHOOTING
 ---------------
@@ -127,7 +160,4 @@ A: Yes. I will install ffmpeg + codecs, ffmpeg-php and flvtool2 on your server f
    is everything you need to convert just about any movie type to flash.
    Shoot me an email at ffmpeg.php AT gmail.com if you are interested.
  
-FURTHER HELP
-------------
 
-If you get stuck, post a message to the ffmpeg-php google group (http://groups-beta.google.com/group/ffmpeg-php)
